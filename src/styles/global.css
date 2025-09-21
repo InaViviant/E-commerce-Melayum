@@ -24,7 +24,6 @@ h1, h2, h3 {
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
-/* src/styles/pages/AltaCostura.css - Estilos específicos */
 .alta-costura-hero {
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
               url('/images/alta-costura-bg.jpg');

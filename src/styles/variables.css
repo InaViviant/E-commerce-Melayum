@@ -1,15 +1,12 @@
 :root {
-  /* Colores para alta costura */
   --primary-gold: #d4af37;
   --primary-dark: #2c3e50;
   --secondary-cream: #f8f6f0;
   --accent-rose: #c9a96e;
   
-  /* Fuentes elegantes */
   --font-primary: 'Playfair Display', serif;
   --font-secondary: 'Source Sans Pro', sans-serif;
   
-  /* Espaciados */
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 2rem;
