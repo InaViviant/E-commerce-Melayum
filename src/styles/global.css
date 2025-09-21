@@ -1,0 +1,51 @@
+body {
+  font-family: var(--font-secondary);
+  color: var(--primary-dark);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-primary);
+  color: var(--primary-dark);
+}
+
+.btn-luxury {
+  background: linear-gradient(45deg, var(--primary-gold), var(--accent-rose));
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 30px;
+  transition: transform 0.3s ease;
+}
+
+.btn-luxury:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* src/styles/pages/AltaCostura.css - Estilos específicos */
+.alta-costura-hero {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+              url('/images/alta-costura-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.collection-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.collection-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
