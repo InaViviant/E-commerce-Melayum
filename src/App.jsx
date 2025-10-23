@@ -1,21 +1,31 @@
-import Navbar from './components/Navbar.jsx';
-import Inicio from './components/Inicio.jsx';
-import Coleccion from './components/Coleccion.jsx';
-import Equipo from './components/Equipo.jsx';
-import Contacto from './components/Contacto.jsx';
-import Footer from './components/Footer.jsx';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './context/CartContext';
+import Navigation from './components/Navigation';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import Team from './pages/Team';
+import Contact from './pages/Contact';
+import Cart from './pages/Cart';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Inicio />
-      <Coleccion />
-      <Equipo />
-      <Contacto />
-      <Footer />
-    </div>
+    <CartProvider>
+      <Router>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/productos" element={<Products />} />
+          <Route path="/equipo" element={<Team />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="/carrito" element={<Cart />} />
+        </Routes>
+        <footer className="bg-dark text-white py-4 mt-5">
+          <div className="container text-center">
+            <p className="mb-0">&copy; 2025 MELAYUM. Todos los derechos reservados.</p>
+          </div>
+        </footer>
+      </Router>
+    </CartProvider>
   );
 }
 
