@@ -18,6 +18,9 @@ const Navigation = () => {
             <Nav.Link as={Link} to="/productos" className="mx-2">Productos</Nav.Link>
             <Nav.Link as={Link} to="/equipo" className="mx-2">Equipo</Nav.Link>
             <Nav.Link as={Link} to="/contacto" className="mx-2">Contacto</Nav.Link>
+            <Nav.Link as={Link} to="/login" className="mx-2">
+              <i className="bi bi-person fs-4"></i>
+            </Nav.Link>
             <Nav.Link as={Link} to="/carrito" className="mx-2 position-relative">
               <i className="bi bi-bag fs-4"></i>
               {getTotalItems() > 0 && (
