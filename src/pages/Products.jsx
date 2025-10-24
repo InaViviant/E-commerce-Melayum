@@ -1,76 +1,112 @@
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Spinner } from 'react-bootstrap';
 import { useCart } from '../context/CartContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Products = () => {
   const { addToCart } = useCart();
   const [notification, setNotification] = useState('');
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const products = [
-    {
-      id: 1,
-      name: 'Vestido Elegante Negro',
-      price: 89.99,
-      image: 'https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Elegante vestido negro perfecto para cualquier ocasión especial'
-    },
-    {
-      id: 2,
-      name: 'Blusa de Seda Blanca',
-      price: 65.00,
-      image: 'https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Blusa de seda premium con diseño sofisticado'
-    },
-    {
-      id: 3,
-      name: 'Pantalón Palazzo Beige',
-      price: 75.50,
-      image: 'https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Pantalón palazzo de corte elegante y cómodo'
-    },
-    {
-      id: 4,
-      name: 'Blazer Estructurado Gris',
-      price: 120.00,
-      image: 'https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Blazer contemporáneo con diseño estructurado'
-    },
-    {
-      id: 5,
-      name: 'Falda Midi Plisada',
-      price: 58.00,
-      image: 'https://images.pexels.com/photos/1631181/pexels-photo-1631181.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Falda midi con elegante plisado'
-    },
-    {
-      id: 6,
-      name: 'Camisa Oversize Blanca',
-      price: 52.00,
-      image: 'https://images.pexels.com/photos/1050244/pexels-photo-1050244.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Camisa oversize versátil y moderna'
-    },
-    {
-      id: 7,
-      name: 'Vestido Midi Floral',
-      price: 95.00,
-      image: 'https://images.pexels.com/photos/1ючина926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Vestido midi con estampado floral exclusivo'
-    },
-    {
-      id: 8,
-      name: 'Trench Coat Camel',
-      price: 145.00,
-      image: 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Trench coat clásico en tono camel'
-    },
-    {
-      id: 9,
-      name: 'Conjunto de Lino',
-      price: 110.00,
-      image: 'https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Conjunto de lino premium para verano'
-    }
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('https://fakestoreapi.com/products');
+        const data = await response.json();
+
+        const fashionCategories = ["women's clothing", "men's clothing", "jewelery"];
+        const fashionProducts = data.filter(product =>
+          fashionCategories.includes(product.category)
+        );
+
+        const womensClothing = fashionProducts.filter(p => p.category === "women's clothing");
+
+        const additionalWomensProducts = [
+          {
+            id: 100,
+            name: "Vestido Elegante de Noche",
+            price: 129.99,
+            image: "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=400",
+            description: "Vestido largo elegante perfecto para eventos especiales y ocasiones formales"
+          },
+          {
+            id: 101,
+            name: "Blusa de Seda Premium",
+            price: 85.00,
+            image: "https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=400",
+            description: "Blusa de seda 100% con diseño sofisticado y acabados de lujo"
+          },
+          {
+            id: 102,
+            name: "Pantalón Palazzo Elegante",
+            price: 95.50,
+            image: "https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg?auto=compress&cs=tinysrgb&w=400",
+            description: "Pantalón palazzo de corte amplio y elegante, ideal para look formal"
+          },
+          {
+            id: 103,
+            name: "Falda Midi Plisada",
+            price: 78.00,
+            image: "https://images.pexels.com/photos/1631181/pexels-photo-1631181.jpeg?auto=compress&cs=tinysrgb&w=400",
+            description: "Falda midi con plisado elegante, perfecta para oficina o eventos"
+          },
+          {
+            id: 104,
+            name: "Vestido Floral Primavera",
+            price: 115.00,
+            image: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400",
+            description: "Vestido con estampado floral exclusivo, diseño fresco y moderno"
+          },
+          {
+            id: 105,
+            name: "Blazer Estructurado",
+            price: 145.00,
+            image: "https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg?auto=compress&cs=tinysrgb&w=400",
+            description: "Blazer con estructura perfecta, ideal para look profesional elegante"
+          },
+          {
+            id: 106,
+            name: "Conjunto de Lino Verano",
+            price: 135.00,
+            image: "https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg?auto=compress&cs=tinysrgb&w=400",
+            description: "Conjunto de lino premium, fresco y cómodo para días calurosos"
+          },
+          {
+            id: 107,
+            name: "Vestido Cóctel Negro",
+            price: 155.00,
+            image: "https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg?auto=compress&cs=tinysrgb&w=400",
+            description: "Vestido cóctel sofisticado, perfecto para eventos nocturnos"
+          }
+        ];
+
+        const formattedProducts = fashionProducts.map((item) => ({
+          id: item.id,
+          name: item.title,
+          price: item.price,
+          image: item.image,
+          description: item.description,
+          category: item.category
+        }));
+
+        const allProducts = [...formattedProducts, ...additionalWomensProducts];
+
+        const sortedProducts = allProducts.sort((a, b) => {
+          if (a.category === "women's clothing" && b.category !== "women's clothing") return -1;
+          if (a.category !== "women's clothing" && b.category === "women's clothing") return 1;
+          return 0;
+        });
+
+        setProducts(sortedProducts);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -99,8 +135,16 @@ const Products = () => {
           <p className="text-muted fs-5">Descubre las últimas tendencias en moda femenina</p>
         </div>
 
-        <Row>
-          {products.map((product) => (
+        {loading ? (
+          <div className="text-center py-5">
+            <Spinner animation="border" role="status" variant="dark">
+              <span className="visually-hidden">Cargando...</span>
+            </Spinner>
+            <p className="mt-3 text-muted">Cargando productos...</p>
+          </div>
+        ) : (
+          <Row>
+            {products.map((product) => (
             <Col key={product.id} md={6} lg={4} className="mb-4">
               <Card className="h-100 border-0 shadow-sm" style={{ transition: 'transform 0.3s' }}
                 onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
@@ -132,7 +176,8 @@ const Products = () => {
               </Card>
             </Col>
           ))}
-        </Row>
+          </Row>
+        )}
       </Container>
     </div>
   );
